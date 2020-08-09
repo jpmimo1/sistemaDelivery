@@ -1,0 +1,137 @@
+{
+    "restaurants": [{
+            "id": 1,
+            "name": "restaurant las delicias",
+            "favorite": true,
+            "categories": [
+                "pollos",
+                "parrillas",
+                "postres"
+            ],
+            "priceMin": 20,
+            "rating": 2.5,
+            "photo": "https://gestion.pe/resizer/tEgse72IKEQXiZ78RctkdN5RocY=/980x528/smart/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/Q2M4IJEW3NAXXOQ7VFKXJQ3EOA.jpg",
+            "sugestion": true
+        },
+        {
+            "id": 2,
+            "name": "restaurant las delicias",
+            "like": true,
+            "categories": [
+                "pollos",
+                "parrillas",
+                "postres"
+            ],
+            "priceMin": 21.5,
+            "rating": 2.5,
+            "photo": "https://cdne.diariocorreo.pe/redactor/uploads/2018/01/02/maido_restaurant_lima_peru_nigiri_guratan_samcora_blog.jpg"
+        },
+        {
+            "id": 3,
+            "name": "restaurant las delicias",
+            "like": true,
+            "categories": [
+                "pollos",
+                "parrillas",
+                "postres"
+            ],
+            "sugestion": true,
+            "priceMin": 23,
+            "rating": 2.5,
+            "photo": "https://elcomercio.pe/resizer/W8czIf1q90faKsI0rrXg2c1akr4=/980x528/smart/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/I7WMNKFSZZDULDZGIRAL4QXEEE.jpg"
+        },
+        {
+            "id": 4,
+            "name": "restaurant las delicias",
+            "like": true,
+            "categories": [
+                "pollos",
+                "parrillas",
+                "postres"
+            ],
+            "priceMin": 15,
+            "rating": 2.5,
+            "photo": "https://portal.andina.pe/EDPfotografia3/Thumbnail/2020/01/05/000643621W.jpg"
+        },
+        {
+            "id": 5,
+            "name": "restaurant las delicias",
+            "like": true,
+            "categories": [
+                "pollos",
+                "parrillas",
+                "postres"
+            ],
+            "priceMin": 35,
+            "rating": 2.5,
+            "photo": "https://www.infoturperu.com.pe/media/k2/items/cache/ae9c83223f38acc633890b0114e397e9_XL.jpg"
+        },
+        {
+            "id": 6,
+            "name": "restaurant las delicias",
+            "like": true,
+            "categories": [
+                "pollos",
+                "parrillas",
+                "postres"
+            ],
+            "priceMin": 20,
+            "sugestion": true,
+            "rating": 2.5,
+            "photo": "https://cde.peru.com//ima/0/0/5/8/8/588298/924x530/peru-criollo.jpg"
+        },
+        {
+            "id": 7,
+            "name": "restaurant las delicias",
+            "like": true,
+            "categories": [
+                "pollos",
+                "parrillas",
+                "postres"
+            ],
+            "priceMin": 21,
+            "rating": 2.5,
+            "photo": "https://portal.andina.pe/EDPfotografia2/Thumbnail/2009/09/30/000107161W.jpg"
+        },
+        {
+            "id": 8,
+            "name": "restaurant las delicias",
+            "like": true,
+            "categories": [
+                "pollos",
+                "parrillas",
+                "postres"
+            ],
+            "priceMin": 22.5,
+            "sugestion": true,
+            "rating": 2.5,
+            "photo": "https://peru21.pe/resizer/mvBBjBEh5DFCVGfJh6dPEP3dyzU=/1200x800/smart/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/C3AMXA2DD5AU7FTI5BSIVPYKRM.jpg"
+        },
+        {
+            "id": 9,
+            "name": "restaurant las delicias",
+            "like": true,
+            "categories": [
+                "pollos",
+                "parrillas",
+                "postres"
+            ],
+            "priceMin": 18,
+            "rating": 2.5,
+            "photo": "https://depor.com/resizer/gSWyDIiomiKSUg-g-8lqdT6DlnI=/1200x900/smart/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/GW7QWBWBKFCKTFV735T7JP4N6I.jpg"
+        },
+        {
+            "id": 10,
+            "name": "restaurant las delicias",
+            "like": true,
+            "categories": [
+                "pollos",
+                "parrillas",
+                "postres"
+            ],
+            "priceMin": 16,
+            "rating": 2.5,
+            "photo": "https://prod.media.libero.pe/1200x660/libero/imagen/2020/04/25/noticia-1587841776-chifa-delivery-coronavirus.jpg"
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "categories": [{
+            "id": "1",
+            "category": "pizzas",
+            "photo": "https://placeralplato.com/files/2016/01/Pizza-con-pepperoni.jpg"
+        },
+        {
+            "id": "2",
+            "category": "pollos",
+            "photo": "https://www.grupodedialogo.org.pe/wp-content/uploads/2016/09/pollo-a-la-brasa.jpg"
+        },
+        {
+            "id": "3",
+            "category": "vegetariana",
+            "photo": "https://www.periodistaenjapon.com/wp-content/uploads/2018/10/comida_vegetariana_japon.jpg"
+        },
+        {
+            "id": "4",
+            "category": "comida criolla",
+            "photo": "https://d1bvpoagx8hqbg.cloudfront.net/originals/04-comidas-puedes-encontrar-restaurante-criollo-a-comer-7ba1ed91848d2bb8317bb8bab031b408.jpg"
+        }
+    ]
+}
