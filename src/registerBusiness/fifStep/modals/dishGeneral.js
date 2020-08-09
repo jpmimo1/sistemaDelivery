@@ -9,18 +9,25 @@ import {
   FormControl,
   InputLabel,
   OutlinedInput,
-  InputAdornment
+  InputAdornment,
+  IconButton
 } from "@material-ui/core";
-import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import {
+  PhotoCamera as PhotoCameraIcon,
+  Close as CloseIcon
+} from "@material-ui/icons";
 import SelectOutlined from "../../../generalComponents/selectOutlined";
 import ModalGeneralStyle from "../../../globals/modalGeneralStyle";
+import ImageUploading from "react-images-uploading";
 
 function DishGeneral({
   title,
   handleChange,
+  handleChangePhoto,
   name,
   description,
   category,
+  photo,
   categories,
   onCancel,
   onSuccess,
@@ -93,25 +100,50 @@ function DishGeneral({
               />
             </Grid>
           ) : null}
-          <Grid item xs={4}>
-            <input
-              accept="image/*"
-              className={classes.input}
-              id="contained-button-file"
-              multiple
-              type="file"
-            />
-            <label htmlFor="contained-button-file">
-              <Button
-                variant="contained"
-                color="secondary"
-                component="span"
-                endIcon={<PhotoCamera />}
-              >
-                Foto
-              </Button>
-            </label>
-          </Grid>
+
+          <ImageUploading
+            acceptType={["jpg", "png", "gif"]}
+            maxFileSize={1024 * 1024 * 5}
+            onChange={handleChangePhoto}
+          >
+            {({ imageList, onImageUpload, onImageRemoveAll, errors }) => {
+              //Revisa que photo exita y que no sea una cadena vacia para obtener el valor de estilo con backgrounImage
+              const styleImage = photo &&
+                photo !== "" && {
+                  backgroundImage: `url(${photo.dataURL})`
+                };
+
+              return (
+                <>
+                  <Grid item xs={4}>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      component="span"
+                      endIcon={<PhotoCameraIcon />}
+                      onClick={onImageUpload}
+                    >
+                      Foto
+                    </Button>
+                  </Grid>
+                  <Grid item xs={8}>
+                    {photo && photo !== "" ? (
+                      <div className={classes.imageContainer}>
+                        <div
+                          className={classes.divImage}
+                          style={styleImage}
+                        ></div>
+                        <IconButton onClick={imageList[0].onRemove}>
+                          <CloseIcon />
+                        </IconButton>
+                      </div>
+                    ) : null}
+                  </Grid>
+                </>
+              );
+            }}
+          </ImageUploading>
+
           <Grid item xs={12}>
             <div className={classes.mainButtons}>
               <Button
@@ -150,6 +182,25 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     display: "flex",
     justifyContent: "space-between"
+  },
+  imageContainer: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center"
+  },
+  divImage: {
+    width: "100%",
+    maxWidth: "400px",
+    maxHeight: "250px",
+    [theme.breakpoints.down("xs")]: {
+      maxHeight: "150px"
+    },
+    height: "500px",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    boxShadow: theme.shadows[1]
   }
 }));
 

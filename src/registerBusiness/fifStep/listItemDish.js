@@ -10,6 +10,7 @@ import { SortableElement, SortableHandle } from "react-sortable-hoc";
 import ConfirmDeleteDish from "./modals/confirmDeleteDish";
 import { useOpenDialog } from "../../hooks";
 import UpdateDish from "./modals/updateDish";
+import SeeDish from "./modals/seeDish";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,6 +56,7 @@ function ListItemDish({
   const classes = useStyles();
   const [openDeleteDishDialog, dispatchOpenDeleteDishDialog] = useOpenDialog();
   const [openUpdateDialog, dispatchOpenUpdateDialog] = useOpenDialog();
+  const [openSeeDish, dispatchOpenSeeDish] = useOpenDialog();
 
   const handleDelete = () => {
     dispatchOpenDeleteDishDialog({ type: "OPEN" });
@@ -75,7 +77,13 @@ function ListItemDish({
       <div className={classes.root}>
         <DragHandle />
         <div className={classes.divButton}>
-          <Button classes={{ root: classes.rootButton }} fullWidth>
+          <Button
+            classes={{ root: classes.rootButton }}
+            fullWidth
+            onClick={() => {
+              dispatchOpenSeeDish({ type: "OPEN" });
+            }}
+          >
             <Typography variant="body2" noWrap>
               {name}
             </Typography>
@@ -107,6 +115,16 @@ function ListItemDish({
         dispatchOpen={dispatchOpenUpdateDialog}
         categories={categories}
         dispatchMenu={dispatchMenu}
+      />
+      <SeeDish
+        open={openSeeDish}
+        onClose={() => {
+          dispatchOpenSeeDish({ type: "CLOSE" });
+        }}
+        name={name}
+        description={description}
+        price={price}
+        photo={photo}
       />
     </>
   );

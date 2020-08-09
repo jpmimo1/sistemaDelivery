@@ -8,7 +8,8 @@ function AddDish({ open, dispatchOpen, categories, dispatchMenu }) {
       name: "",
       description: "",
       category: "",
-      price: "0"
+      price: "0",
+      photo: null
     }
   });
 
@@ -21,7 +22,8 @@ function AddDish({ open, dispatchOpen, categories, dispatchMenu }) {
             id: Date.now(),
             name: fieldsValues.values.name,
             description: fieldsValues.values.description,
-            price: fieldsValues.values.price
+            price: fieldsValues.values.price,
+            photo: fieldsValues.values.photo
           }
         })
       : dispatchMenu({
@@ -30,7 +32,8 @@ function AddDish({ open, dispatchOpen, categories, dispatchMenu }) {
             id: Date.now(),
             name: fieldsValues.values.name,
             description: fieldsValues.values.description,
-            price: fieldsValues.values.price
+            price: fieldsValues.values.price,
+            photo: fieldsValues.values.photo
           },
           idCategory
         });
@@ -41,6 +44,11 @@ function AddDish({ open, dispatchOpen, categories, dispatchMenu }) {
   const handleOnClose = () => {
     fieldsValues.resetForm();
     dispatchOpen({ type: "CLOSE" });
+  };
+
+  const handleChangePhoto = (imageList) => {
+    if (imageList.length > 0) fieldsValues.setFieldValue("photo", imageList[0]);
+    else fieldsValues.setFieldValue("photo", null);
   };
 
   const categoriesRebuild = categories.map(({ id, name }) => ({
@@ -55,12 +63,14 @@ function AddDish({ open, dispatchOpen, categories, dispatchMenu }) {
       description={fieldsValues.values.description}
       category={fieldsValues.values.category}
       price={fieldsValues.values.price}
+      photo={fieldsValues.values.photo}
       handleChange={fieldsValues.handleChange}
       onClose={handleOnClose}
       onCancel={handleOnClose}
       onSuccess={handleOnAdd}
       successLabel={"Agregar"}
       categories={categoriesRebuild}
+      handleChangePhoto={handleChangePhoto}
     />
   );
   /*
