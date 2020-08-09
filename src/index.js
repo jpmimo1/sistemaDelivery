@@ -1,14 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App"; //main App
+import * as serviceWorker from "./serviceWorker";
+import { ThemeProvider, CssBaseline } from "@material-ui/core";
+import theme from "./theme/theme";
+import { BrowserRouter as Router } from "react-router-dom";
+//Firebase
+import Firebase, { FirebaseContext } from "./firebase";
+import { ContextGlobalReducerProvider } from "./globals/globalReducer/context";
+//Global reducer
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <FirebaseContext.Provider value={new Firebase()}>
+      <ContextGlobalReducerProvider>
+        <Router>
+          <App />
+        </Router>
+      </ContextGlobalReducerProvider>
+    </FirebaseContext.Provider>
+  </ThemeProvider>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
