@@ -5,6 +5,7 @@ import FirstStep from "./firstStep";
 import ThirdStep from "./thirdStep";
 import FourthStep from "./fourthStep";
 import FifthStep from "./fifStep/fifthStep";
+import SixthStep from "./sixthStep/sixthStep";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 function Steps({ index }) {
   const classes = useStyles();
   const steps = [
+    <SixthStep />,
     <FifthStep />,
     <FourthStep />,
     <ThirdStep />,

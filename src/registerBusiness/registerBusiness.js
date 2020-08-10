@@ -26,7 +26,8 @@ const stepsData = [
   { title: "Datos Iniciales" },
   { title: "Ubicación" },
   { title: "Categoria" },
-  { title: "Carta" }
+  { title: "Carta" },
+  { title: "Fotos" }
 ];
 const stepActualInicialState = {
   index: 0,
