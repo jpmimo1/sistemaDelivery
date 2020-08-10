@@ -193,7 +193,7 @@ function FifthStep() {
     menuReducer,
     menuInitialState
   );
-  const [openDialogAddDish, dispatchOpenDialogAddDish] = useOpenDialog(true);
+  const [openDialogAddDish, dispatchOpenDialogAddDish] = useOpenDialog();
   const [
     openDialogAddCategory,
     dispatchOpenDialogAddCategory
