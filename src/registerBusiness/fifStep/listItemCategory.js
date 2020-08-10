@@ -56,7 +56,6 @@ function ListItemCategory({ name, id, description, dispatchMenu }) {
           <DeleteIcon />
         </IconButton>
       </div>
-      <Divider />
       <ConfirmDeleteCategory
         open={openDialogDelete}
         categoryName={name}

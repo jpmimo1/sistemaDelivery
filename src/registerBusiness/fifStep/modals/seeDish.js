@@ -1,8 +1,6 @@
 import React from "react";
 import {
   Dialog,
-  Card,
-  CardHeader,
   CardMedia,
   makeStyles,
   CardContent,
@@ -20,48 +18,50 @@ function SeeDish({ open, onClose, name, description, photo, price }) {
       maxWidth="xs"
       classes={{ paper: classes.dialogRoot }}
     >
-      <ModalGeneralStyle onClose={onClose}>
-        <Card>
-          <Typography
-            noWrap
-            variant="subtitle1"
-            align="center"
-            className={classes.titleCard}
-          >
-            {name}
-          </Typography>
-          {photo && photo !== "" && (
-            <CardMedia
-              image={photo.dataURL}
-              title={name}
-              className={classes.cardMedia}
-            />
-          )}
-          {description && description !== "" && (
-            <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {description}
-              </Typography>
-            </CardContent>
-          )}
-          {price && price !== "" && !isNaN(Number(price)) && (
-            <div className={classes.divPrice}>
-              <Typography
-                variant="body2"
-                className={classes.labelPrice}
-              >{`Precio: S/. `}</Typography>
-              <Typography variant="body1">
-                {numeral(price).format("0.00")}
-              </Typography>
-            </div>
-          )}
-        </Card>
+      <ModalGeneralStyle onClose={onClose} className={classes.root}>
+        <Typography
+          noWrap
+          variant="h5"
+          align="center"
+          className={classes.title}
+          color="secondary"
+        >
+          {name}
+        </Typography>
+        {photo && photo !== "" && (
+          <CardMedia
+            image={photo.dataURL}
+            title={name}
+            className={classes.cardMedia}
+          />
+        )}
+        {description && description !== "" && (
+          <CardContent>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {description}
+            </Typography>
+          </CardContent>
+        )}
+        {price && price !== "" && !isNaN(Number(price)) && (
+          <div className={classes.divPrice}>
+            <Typography
+              variant="body1"
+              className={classes.labelPrice}
+            >{`Precio: S/. `}</Typography>
+            <Typography variant="h5" component="span">
+              {numeral(price).format("0.00")}
+            </Typography>
+          </div>
+        )}
       </ModalGeneralStyle>
     </Dialog>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: theme.spacing(0, 0, 3, 0)
+  },
   dialogRoot: {
     width: "100%"
   },
@@ -74,13 +74,13 @@ const useStyles = makeStyles((theme) => ({
     },
     height: "500px"
   },
-  titleCard: {
-    padding: theme.spacing(2)
+  title: {
+    padding: theme.spacing(1)
   },
   divPrice: {
     display: "flex",
     justifyContent: "center",
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     alignItems: "baseline"
   },
   labelPrice: {
