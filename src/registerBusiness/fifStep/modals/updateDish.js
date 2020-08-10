@@ -8,6 +8,7 @@ function UpdateDish({
   description,
   price,
   category,
+  photo,
   open,
   dispatchOpen,
   categories,
@@ -18,12 +19,13 @@ function UpdateDish({
       name: "",
       description: "",
       category: "",
-      price: "0"
+      price: "0",
+      photo: null
     }
   });
 
   useEffect(() => {
-    fieldsValues.setValues({ name, description, category, price });
+    fieldsValues.setValues({ name, description, category, price, photo });
   }, [open]);
 
   const handleOnClose = () => {
@@ -37,11 +39,18 @@ function UpdateDish({
         id,
         name: fieldsValues.values.name,
         description: fieldsValues.values.description,
-        price: fieldsValues.values.price
+        price: fieldsValues.values.price,
+        photo: fieldsValues.values.photo
       },
       idCategory: fieldsValues.values.category
     });
     dispatchOpen({ type: "CLOSE" });
+  };
+
+  const handleChangePhoto = (imageList) => {
+    if (imageList && imageList.length > 0)
+      fieldsValues.setFieldValue("photo", imageList[0]);
+    else fieldsValues.setFieldValue("photo", null);
   };
 
   const categoriesRefactor = categories.map(({ id, name }) => ({
@@ -56,7 +65,9 @@ function UpdateDish({
       description={fieldsValues.values.description}
       category={fieldsValues.values.category}
       price={fieldsValues.values.price}
+      photo={fieldsValues.values.photo}
       handleChange={fieldsValues.handleChange}
+      handleChangePhoto={handleChangePhoto}
       categories={categoriesRefactor}
       open={open}
       successLabel={"Modificar"}

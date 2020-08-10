@@ -133,7 +133,15 @@ function DishGeneral({
                           className={classes.divImage}
                           style={styleImage}
                         ></div>
-                        <IconButton onClick={imageList[0].onRemove}>
+                        <IconButton
+                          onClick={
+                            imageList && imageList.length > 0
+                              ? imageList[0].onRemove
+                              : () => {
+                                  handleChangePhoto(null);
+                                }
+                          }
+                        >
                           <CloseIcon />
                         </IconButton>
                       </div>

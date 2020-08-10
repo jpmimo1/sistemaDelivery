@@ -111,6 +111,7 @@ function ListItemDish({
         description={description}
         price={price}
         category={idCategory ? idCategory : ""}
+        photo={photo}
         open={openUpdateDialog}
         dispatchOpen={dispatchOpenUpdateDialog}
         categories={categories}
