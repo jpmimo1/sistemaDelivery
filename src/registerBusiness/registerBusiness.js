@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
 import Steps from "./steps";
+import useDataRegisterBusiness from "./dataHandler/actions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,7 +28,9 @@ const stepsData = [
   { title: "Ubicación" },
   { title: "Categoria" },
   { title: "Carta" },
-  { title: "Fotos" }
+  { title: "Fotos" },
+  { title: "Resumen" },
+  { title: "Registro Completo" }
 ];
 const stepActualInicialState = {
   index: 0,
@@ -83,6 +86,8 @@ function RegisterBusiness() {
     stepsReducer,
     stepActualInicialState
   );
+
+  const dataRegister = useDataRegisterBusiness();
 
   useEffect(() => {
     document.body.style.overscrollBehavior = "contain";

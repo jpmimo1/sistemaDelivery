@@ -1,11 +1,13 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
-import SecondStep from "./secondStep";
 import FirstStep from "./firstStep";
+import SecondStep from "./secondStep";
+import FourthStep from "./fouthStep/fourthStep";
 import ThirdStep from "./thirdStep/thirdStep";
 import FifthStep from "./fifStep/fifthStep";
 import SixthStep from "./sixthStep/sixthStep";
-import FourthStep from "./fouthStep/fourthStep";
+import SeventhStep from "./seventhStep/seventhStep";
+import EighthStep from "./eighthStep/eighthStep";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,13 +18,25 @@ const useStyles = makeStyles((theme) => ({
 
 function Steps({ index }) {
   const classes = useStyles();
-  const steps = [
+  /* const steps = [
+    <EighthStep />,
+    <SeventhStep />,
     <SixthStep />,
     <FifthStep />,
     <FourthStep />,
     <ThirdStep />,
     <SecondStep />,
     <FirstStep />
+  ]; */
+  const steps = [
+    <FirstStep />,
+    <SecondStep />,
+    <ThirdStep />,
+    <FourthStep />,
+    <FifthStep />,
+    <SixthStep />,
+    <SeventhStep />,
+    <EighthStep />
   ];
   return <div className={classes.root}>{steps[index]}</div>;
 }

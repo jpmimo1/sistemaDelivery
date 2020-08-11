@@ -1,12 +1,6 @@
 import React from "react";
 import { SortableHandle, SortableElement } from "react-sortable-hoc";
-import {
-  IconButton,
-  CardMedia,
-  makeStyles,
-  Button,
-  Typography
-} from "@material-ui/core";
+import { IconButton, CardMedia, makeStyles } from "@material-ui/core";
 import {
   Delete as DeleteIcon,
   Edit as EditIcon,

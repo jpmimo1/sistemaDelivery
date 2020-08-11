@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, makeStyles, IconButton, Divider } from "@material-ui/core";
+import { Typography, makeStyles, IconButton } from "@material-ui/core";
 import { Delete as DeleteIcon, Edit as EditIcon } from "@material-ui/icons";
 import ConfirmDeleteCategory from "./modals/confirmDeleteCategory";
 import { useOpenDialog } from "../../hooks";

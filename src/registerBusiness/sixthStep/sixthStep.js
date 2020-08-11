@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer } from "react";
 import { Typography, Grid, Button, makeStyles } from "@material-ui/core";
 import { Photo as PhotoIcon } from "@material-ui/icons";
 import { arrayMove } from "react-sortable-hoc";
