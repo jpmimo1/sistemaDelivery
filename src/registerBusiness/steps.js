@@ -2,10 +2,10 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 import SecondStep from "./secondStep";
 import FirstStep from "./firstStep";
-import ThirdStep from "./thirdStep";
-import FourthStep from "./fourthStep";
+import ThirdStep from "./thirdStep/thirdStep";
 import FifthStep from "./fifStep/fifthStep";
 import SixthStep from "./sixthStep/sixthStep";
+import FourthStep from "./fouthStep/fourthStep";
 
 const useStyles = makeStyles((theme) => ({
   root: {

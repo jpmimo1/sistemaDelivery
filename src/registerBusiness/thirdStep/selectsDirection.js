@@ -1,11 +1,11 @@
 import React, { useReducer } from "react";
 import { Grid } from "@material-ui/core";
-import SelectOutlined from "../generalComponents/selectOutlined";
+import SelectOutlined from "../../generalComponents/selectOutlined";
 import {
   getDistricts,
   getProvinces,
   getDepartaments
-} from "../data/ubigeoPeru/functions";
+} from "../../data/ubigeoPeru/functions";
 
 const locationInitialState = {
   department: "",
