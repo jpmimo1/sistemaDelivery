@@ -1,35 +1,30 @@
 import { reducer, initialState } from "../reducer";
-import Yup from "../../../validation/validation";
 
 import fullValidation from "../fullValidation";
 import { useReducer } from "react";
-
-const validationSchema = Yup.object({
-  name: Yup.string().required().max(100),
-  description: Yup.string().max(300),
-  phone: Yup.string().phoneNumber()
-});
-
-const validationWarnings = Yup.object({
-  description: Yup.string().required("Falta Descripción"),
-  phone: Yup.string().required("Falta Número de teléfono")
-});
+import validators from "../validators";
 
 class DataRegisterBusiness {
   constructor(data, dispatchData) {
     this.data = data;
     this.dispatchData = dispatchData;
+    this.validators = validators();
   }
   setInitialData = async (initialData) => {
     const initialDataValidated = await fullValidation(
-      validationSchema,
-      validationWarnings,
+      this.validators.getInitialDataMain(),
+      this.validators.getInitialDataWarnings(),
       initialData
     );
+
     this.dispatchData({
       type: "SET-INITIAL-DATA",
       initialData: initialDataValidated
     });
+    return initialDataValidated;
+  };
+  getInitialData = () => {
+    return this.data.initialData;
   };
 }
 

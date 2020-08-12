@@ -1,7 +1,8 @@
 /*Esta funcion retorna una promesa
 si la promesa se resuelve te retorna tu objeto validado 
 o tambien el objeto con warnings que puedieran existir, 
-si se rechaza la promesa te retorna solamente los errores */
+o el objeto con los errores, esta promesa no se rechaza
+si lanza error lo concatena al objeto de error  */
 
 const fullValidation = async (
   mainValidationSchema,
@@ -21,16 +22,16 @@ const fullValidation = async (
     );
     fullObject = { ...fullObject, ...newObject };
   } catch (errors) {
-    return { [keyObject]: { ...fullObject }, errors };
+    return { data: { ...fullObject }, errors };
   }
   try {
     const newObject = await warningValidationSchema.validate(
       prevObject,
       optionsValidation
     );
-    return { [keyObject]: { ...fullObject, ...newObject } };
+    return { data: { ...fullObject, ...newObject } };
   } catch ({ errors }) {
-    return { [keyObject]: fullObject, warnings: errors };
+    return { data: fullObject, warnings: errors };
   }
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Grid, Link, makeStyles } from "@material-ui/core";
+import { Typography, Grid, makeStyles } from "@material-ui/core";
 import {
   ImportContacts as ImportContactsIcon,
   Room as RoomIcon,

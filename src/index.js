@@ -9,17 +9,20 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Firebase, { FirebaseContext } from "./firebase";
 import { ContextGlobalReducerProvider } from "./globals/globalReducer/context";
 //Global reducer
+import { SnackbarProvider } from "notistack";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
-    <FirebaseContext.Provider value={new Firebase()}>
-      <ContextGlobalReducerProvider>
-        <Router>
-          <App />
-        </Router>
-      </ContextGlobalReducerProvider>
-    </FirebaseContext.Provider>
+    <SnackbarProvider>
+      <FirebaseContext.Provider value={new Firebase()}>
+        <ContextGlobalReducerProvider>
+          <Router>
+            <App />
+          </Router>
+        </ContextGlobalReducerProvider>
+      </FirebaseContext.Provider>
+    </SnackbarProvider>
   </ThemeProvider>,
   document.getElementById("root")
 );

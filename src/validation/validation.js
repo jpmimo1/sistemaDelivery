@@ -15,7 +15,7 @@ Yup.addMethod(Yup.string, "phoneNumber", function () {
     value
   ) {
     const regExpTel = /\d{9}/;
-    return value === "" || regExpTel.test(value) || this.createError();
+    return !value || value === "" || regExpTel.test(value) || false;
   });
 });
 

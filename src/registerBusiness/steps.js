@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
-import FirstStep from "./firstStep";
-import SecondStep from "./secondStep";
+import FirstStep from "./firstStep/firstStep";
+import SecondStep from "./secondStep/secondStep";
 import FourthStep from "./fouthStep/fourthStep";
 import ThirdStep from "./thirdStep/thirdStep";
 import FifthStep from "./fifStep/fifthStep";
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Steps({ index }) {
+function Steps({ globalStepsHandler }) {
   const classes = useStyles();
   /* const steps = [
     <EighthStep />,
@@ -30,7 +30,7 @@ function Steps({ index }) {
   ]; */
   const steps = [
     <FirstStep />,
-    <SecondStep />,
+    <SecondStep dataHandler={globalStepsHandler.getSecondStepData()} />,
     <ThirdStep />,
     <FourthStep />,
     <FifthStep />,
@@ -38,7 +38,11 @@ function Steps({ index }) {
     <SeventhStep />,
     <EighthStep />
   ];
-  return <div className={classes.root}>{steps[index]}</div>;
+  return (
+    <div className={classes.root}>
+      {steps[globalStepsHandler.getStepsNavigator().getIndex()]}
+    </div>
+  );
 }
 
 export default Steps;
