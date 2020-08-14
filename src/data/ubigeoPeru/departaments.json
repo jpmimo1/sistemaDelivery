@@ -1,101 +1,201 @@
 [{
         "id": "01",
-        "name": "Amazonas"
+        "name": "Amazonas",
+        "location": {
+            "lat": -6.229728,
+            "lng": -77.872292
+        }
     },
     {
         "id": "02",
-        "name": "\u00c1ncash"
+        "name": "\u00c1ncash",
+        "location": {
+            "lat": -9.529565,
+            "lng": -77.528511
+        }
     },
     {
         "id": "03",
-        "name": "Apur\u00edmac"
+        "name": "Apur\u00edmac",
+        "location": {
+            "lat": -13.637348,
+            "lng": -72.878856
+        }
     },
     {
         "id": "04",
-        "name": "Arequipa"
+        "name": "Arequipa",
+        "location": {
+            "lat": -16.398937,
+            "lng": -71.536879
+        }
     },
     {
         "id": "05",
-        "name": "Ayacucho"
+        "name": "Ayacucho",
+        "location": {
+            "lat": -13.160650,
+            "lng": -74.225480
+        }
     },
     {
         "id": "06",
-        "name": "Cajamarca"
+        "name": "Cajamarca",
+        "location": {
+            "lat": -7.156899,
+            "lng": -78.517153
+        }
     },
     {
         "id": "07",
-        "name": "Callao"
+        "name": "Callao",
+        "location": {
+            "lat": -12.052676,
+            "lng": -77.138850
+        }
     },
     {
         "id": "08",
-        "name": "Cusco"
+        "name": "Cusco",
+        "location": {
+            "lat": -13.516760,
+            "lng": -71.978821
+        }
     },
     {
         "id": "09",
-        "name": "Huancavelica"
+        "name": "Huancavelica",
+        "location": {
+            "lat": -12.787327,
+            "lng": -74.972971
+        }
     },
     {
         "id": "10",
-        "name": "Hu\u00e1nuco"
+        "name": "Hu\u00e1nuco",
+        "location": {
+            "lat": -9.929677,
+            "lng": -76.239636
+        }
     },
     {
         "id": "11",
-        "name": "Ica"
+        "name": "Ica",
+        "location": {
+            "lat": -14.064084,
+            "lng": -75.728768
+        }
     },
     {
         "id": "12",
-        "name": "Jun\u00edn"
+        "name": "Jun\u00edn",
+        "location": {
+            "lat": -12.068183,
+            "lng": -75.209718
+        }
     },
     {
         "id": "13",
-        "name": "La Libertad"
+        "name": "La Libertad",
+        "location": {
+            "lat": -8.111913,
+            "lng": -79.028277
+        }
     },
     {
         "id": "14",
-        "name": "Lambayeque"
+        "name": "Lambayeque",
+        "location": {
+            "lat": -6.771586,
+            "lng": -79.838340
+        }
     },
     {
         "id": "15",
-        "name": "Lima"
+        "name": "Lima",
+        "location": {
+            "lat": -12.045709,
+            "lng": -77.030158
+        }
     },
     {
         "id": "16",
-        "name": "Loreto"
+        "name": "Loreto",
+        "location": {
+            "lat": -3.749192,
+            "lng": -73.244137
+        }
     },
     {
         "id": "17",
-        "name": "Madre de Dios"
+        "name": "Madre de Dios",
+        "location": {
+            "lat": -12.594541,
+            "lng": -69.176154
+        }
     },
     {
         "id": "18",
-        "name": "Moquegua"
+        "name": "Moquegua",
+        "location": {
+            "lat": -17.193854,
+            "lng": -70.934543
+        }
     },
     {
         "id": "19",
-        "name": "Pasco"
+        "name": "Pasco",
+        "location": {
+            "lat": -10.683697,
+            "lng": -76.256075
+        }
     },
     {
         "id": "20",
-        "name": "Piura"
+        "name": "Piura",
+        "location": {
+            "lat": -5.196983,
+            "lng": -80.626389
+        }
     },
     {
         "id": "21",
-        "name": "Puno"
+        "name": "Puno",
+        "location": {
+            "lat": -15.840646,
+            "lng": -70.027754
+        }
     },
     {
         "id": "22",
-        "name": "San Mart\u00edn"
+        "name": "San Mart\u00edn",
+        "location": {
+            "lat": -6.034838,
+            "lng": -76.974397
+        }
     },
     {
         "id": "23",
-        "name": "Tacna"
+        "name": "Tacna",
+        "location": {
+            "lat": -18.013793,
+            "lng": -70.250804
+        }
     },
     {
         "id": "24",
-        "name": "Tumbes"
+        "name": "Tumbes",
+        "location": {
+            "lat": -3.570710,
+            "lng": -80.459304
+        }
     },
     {
         "id": "25",
-        "name": "Ucayali"
+        "name": "Ucayali",
+        "location": {
+            "lat": -8.383249,
+            "lng": -74.532035
+        }
     }
 ]

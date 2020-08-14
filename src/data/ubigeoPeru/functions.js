@@ -21,4 +21,8 @@ const getDistricts = (codProvince) => {
     .map((district) => ({ id: district.id, label: district.name }));
 };
 
-export { getDepartaments, getProvinces, getDistricts };
+const getDepartment = (id) => {
+  return departaments.filter((department) => department.id === id)[0];
+};
+
+export { getDepartaments, getProvinces, getDistricts, getDepartment };
