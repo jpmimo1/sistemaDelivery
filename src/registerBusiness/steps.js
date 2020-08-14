@@ -31,7 +31,7 @@ function Steps({ globalStepsHandler }) {
   const steps = [
     <FirstStep />,
     <SecondStep dataHandler={globalStepsHandler.getSecondStepData()} />,
-    <ThirdStep />,
+    <ThirdStep dataHandler={globalStepsHandler.getThirdStepData()} />,
     <FourthStep />,
     <FifthStep />,
     <SixthStep />,

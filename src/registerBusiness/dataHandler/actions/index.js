@@ -1,8 +1,8 @@
 import { reducer, initialState } from "../reducer";
 
-import fullValidation from "../fullValidation";
+import fullValidation from "../validations/fullValidation";
 import { useReducer } from "react";
-import validators from "../validators";
+import validators from "../validations/validators";
 
 class DataRegisterBusiness {
   constructor(data, dispatchData) {
@@ -25,6 +25,20 @@ class DataRegisterBusiness {
   };
   getInitialData = () => {
     return this.data.initialData;
+  };
+
+  setLocation = async (location) => {
+    const locationValidated = await fullValidation(
+      this.validators.getLocationMain(),
+      this.validators.getLocationWarnings(),
+      location
+    );
+
+    this.dispatchData({ type: "SET-LOCATION", location: locationValidated });
+    return locationValidated;
+  };
+  getLocation = () => {
+    return this.data.location;
   };
 }
 

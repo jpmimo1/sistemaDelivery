@@ -19,12 +19,6 @@ function SecondStep({ dataHandler }) {
         numero de télefono.
       </Typography>
       <TextField
-        error={dataHandler.touched.name && !!dataHandler.errors.name}
-        helperText={
-          dataHandler.touched.name && dataHandler.errors.name
-            ? dataHandler.errors.name
-            : ""
-        }
         className={classes.textField}
         fullWidth
         id="name"
@@ -35,6 +29,12 @@ function SecondStep({ dataHandler }) {
         value={dataHandler.values.name}
         onChange={dataHandler.handleChange}
         onBlur={dataHandler.handleBlur}
+        error={dataHandler.touched.name && !!dataHandler.errors.name}
+        helperText={
+          dataHandler.touched.name && dataHandler.errors.name
+            ? dataHandler.errors.name
+            : ""
+        }
       />
       <TextField
         error={

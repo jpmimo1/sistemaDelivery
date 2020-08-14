@@ -10,11 +10,12 @@ import Firebase, { FirebaseContext } from "./firebase";
 import { ContextGlobalReducerProvider } from "./globals/globalReducer/context";
 //Global reducer
 import { SnackbarProvider } from "notistack";
+//import Tests from "./Tests";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
-    <SnackbarProvider>
+    <SnackbarProvider maxSnack={4}>
       <FirebaseContext.Provider value={new Firebase()}>
         <ContextGlobalReducerProvider>
           <Router>
@@ -26,6 +27,8 @@ ReactDOM.render(
   </ThemeProvider>,
   document.getElementById("root")
 );
+
+//ReactDOM.render(<Tests />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

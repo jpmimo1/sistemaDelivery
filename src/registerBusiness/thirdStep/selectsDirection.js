@@ -1,102 +1,82 @@
-import React, { useReducer } from "react";
+import React from "react";
 import { Grid } from "@material-ui/core";
 import SelectOutlined from "../../generalComponents/selectOutlined";
-import {
-  getDistricts,
-  getProvinces,
-  getDepartaments
-} from "../../data/ubigeoPeru/functions";
+import useSelectDirectionDataHandler from "./selectDirectionDataHandler";
 
-const locationInitialState = {
-  department: "",
-  province: "",
-  district: "",
-  departments: getDepartaments(),
-  provinces: [],
-  districts: []
-};
+function SelectsDirection({ dataHandler, dispatchFirstLocation }) {
+  const selectDirectionDataHandler = useSelectDirectionDataHandler(
+    dataHandler,
+    dispatchFirstLocation
+  );
 
-const locationReducer = (state, action) => {
-  switch (action.type) {
-    case "CHANGE-DEPARTMENT":
-      return {
-        ...state,
-        department: action.department,
-        province: "",
-        district: "",
-        provinces: getProvinces(action.department),
-        districts: []
-      };
-    case "CHANGE-PROVINCE":
-      return {
-        ...state,
-        province: action.province,
-        district: "",
-        districts: getDistricts(action.province)
-      };
-    case "CHANGE-DISTRICT":
-      return {
-        ...state,
-        district: action.district
-      };
-    default:
-      return state;
-  }
-};
-
-function SelectsDirection() {
-  const [
-    { department, province, district, departments, provinces, districts },
-    dispatch
-  ] = useReducer(locationReducer, locationInitialState);
   return (
     <>
       <Grid item xs={6}>
         <SelectOutlined
-          id="departament"
+          required
+          id="department"
+          name="department"
           idLabel="departament-label"
           label="Departamento"
-          data={departments}
+          data={selectDirectionDataHandler.getDepartaments()}
           noneLabel={"Ninguno"}
-          value={department}
+          value={selectDirectionDataHandler.getDepartment()}
           onChange={(e) => {
-            dispatch({
-              type: "CHANGE-DEPARTMENT",
-              department: e.target.value
-            });
+            selectDirectionDataHandler.setDepartment(e.target.value);
           }}
+          onBlur={dataHandler.handleBlur}
+          error={
+            dataHandler.touched.department && !!dataHandler.errors.department
+          }
+          helperText={
+            dataHandler.touched.department && dataHandler.errors.department
+              ? dataHandler.errors.department
+              : ""
+          }
         />
       </Grid>
       <Grid item xs={6}>
         <SelectOutlined
+          required
           id="province"
+          name="province"
           idLabel="province-label"
           label="Provincia"
-          data={provinces}
+          data={selectDirectionDataHandler.getProvinces()}
           noneLabel={"Ninguno"}
-          value={province}
+          value={selectDirectionDataHandler.getProvince()}
           onChange={(e) => {
-            dispatch({
-              type: "CHANGE-PROVINCE",
-              province: e.target.value
-            });
+            selectDirectionDataHandler.setProvince(e.target.value);
           }}
+          onBlur={dataHandler.handleBlur}
+          error={dataHandler.touched.province && !!dataHandler.errors.province}
+          helperText={
+            dataHandler.touched.province && dataHandler.errors.province
+              ? dataHandler.errors.province
+              : ""
+          }
         />
       </Grid>
       <Grid item xs={6}>
         <SelectOutlined
+          required
           id="district"
+          name="district"
           idLabel="district-label"
           label="Distrito"
-          data={districts}
+          data={selectDirectionDataHandler.getDistricts()}
           noneLabel={"Ninguno"}
-          value={district}
+          value={selectDirectionDataHandler.getDistrict()}
           onChange={(e) => {
-            dispatch({
-              type: "CHANGE-DISTRICT",
-              district: e.target.value
-            });
+            selectDirectionDataHandler.setDistrict(e.target.value);
           }}
+          onBlur={dataHandler.handleBlur}
+          error={dataHandler.touched.district && !!dataHandler.errors.district}
+          helperText={
+            dataHandler.touched.district && dataHandler.errors.district
+              ? dataHandler.errors.district
+              : ""
+          }
         />
       </Grid>
     </>

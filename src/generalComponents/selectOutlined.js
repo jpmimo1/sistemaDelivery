@@ -1,5 +1,11 @@
 import React from "react";
-import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText
+} from "@material-ui/core";
 
 function SelectOutlined({
   idLabel,
@@ -8,6 +14,9 @@ function SelectOutlined({
   label,
   data,
   noneLabel,
+  helperText,
+  error,
+  required,
   ...props
 }) {
   const items = data.map((item) => (
@@ -23,11 +32,20 @@ function SelectOutlined({
   );
 
   return (
-    <FormControl className={className} variant="outlined" fullWidth>
+    <FormControl
+      className={className}
+      variant="outlined"
+      error={error}
+      fullWidth
+      required={required}
+    >
       <InputLabel id={idLabel}>{label}</InputLabel>
       <Select labelId={idLabel} id={id} label={label} {...props}>
         {items}
       </Select>
+      {helperText && helperText !== "" && (
+        <FormHelperText>{helperText}</FormHelperText>
+      )}
     </FormControl>
   );
 }

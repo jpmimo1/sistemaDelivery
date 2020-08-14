@@ -35,7 +35,7 @@ function RegisterBusiness() {
           {stepsNavigator.getData()["title"]}
         </Typography>
       </AppBar>
-      <div className={classes.divSpacing}></div>
+      <div className={classes.divSpacing}/>
       <Steps globalStepsHandler={globalStepsHandler} />
       <NavigatorSteps globalStepsHandler={globalStepsHandler} />
     </>

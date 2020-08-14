@@ -1,4 +1,4 @@
-import validators from "../dataHandler/validators";
+import validators from "../dataHandler/validations/validators";
 import { useFormik } from "formik";
 
 const validator = validators().getInitialDataMain();
