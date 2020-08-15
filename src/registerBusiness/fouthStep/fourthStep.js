@@ -1,24 +1,14 @@
 import React, { useReducer } from "react";
 import { Typography, Grid, List, makeStyles, Paper } from "@material-ui/core";
 import ListItemCategory from "./listItemCategory";
-import ChipCategory from "./chipCategory";
+import ListChipsCategory from "./listChipsCategory";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
     maxHeight: theme.spacing(50),
     overflow: "auto"
-  },
-  paper: {
-    display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    listStyle: "none",
-    padding: theme.spacing(0.5),
-    margin: 0,
-    minHeight: theme.spacing(5)
   },
   paperCategories: {
     overflow: "hidden"
@@ -56,7 +46,7 @@ const selectedCategoriesReducer = (state, action) => {
   }
 };
 
-function FourthStep() {
+function FourthStep({ dataHandler }) {
   const classes = useStyles();
   const [selectedCategories, selectedCategoriesDispatch] = useReducer(
     selectedCategoriesReducer,
@@ -73,18 +63,11 @@ function FourthStep() {
       </Typography>
       <Grid container spacing={2} justify="center">
         <Grid item xs={12}>
-          <Paper component="ul" className={classes.paper}>
-            {selectedCategories.map(({ id, category }) => (
-              <ChipCategory
-                key={id}
-                id={id}
-                category={category}
-                dispatch={selectedCategoriesDispatch}
-              />
-            ))}
+          <Paper className={classes.paper}>
+            <ListChipsCategory dataHandler={dataHandler} />
           </Paper>
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={10} sm={8} md={6} lg={4}>
           <Paper className={classes.paperCategories}>
             <List className={classes.root} disablePadding>
               {categorias.map(({ id, category }) => (
@@ -92,8 +75,7 @@ function FourthStep() {
                   key={id}
                   id={id}
                   category={category}
-                  selectedCategories={selectedCategories}
-                  dispatch={selectedCategoriesDispatch}
+                  dataHandler={dataHandler}
                 />
               ))}
             </List>

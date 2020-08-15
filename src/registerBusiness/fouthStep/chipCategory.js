@@ -7,21 +7,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function ChipCategory({ id, category, dispatch }) {
+function ChipCategory({ id, category, dataHandler }) {
   const classes = useStyles();
   return (
-    <li>
-      <Chip
-        variant="outlined"
-        size="small"
-        color="primary"
-        label={category}
-        className={classes.chip}
-        onDelete={() => {
-          dispatch({ type: "DELETE", id });
-        }}
-      />
-    </li>
+    <Chip
+      variant="outlined"
+      size="small"
+      color="primary"
+      label={category}
+      className={classes.chip}
+      onDelete={() => {
+        dataHandler.deleteElement(id);
+      }}
+    />
   );
 }
 

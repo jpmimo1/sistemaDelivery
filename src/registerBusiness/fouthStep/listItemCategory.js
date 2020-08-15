@@ -9,15 +9,15 @@ import {
 } from "@material-ui/core";
 import { Info as InfoIcon } from "@material-ui/icons";
 
-function ListItemCategory({ id, category, selectedCategories, dispatch }) {
-  const isSelect = selectedCategories.reduce((prev, element) => {
+function ListItemCategory({ id, category, dataHandler }) {
+  const isSelect = dataHandler.data.reduce((prev, element) => {
     return prev || element.id === id;
   }, false);
 
   const handlerOnClick = () => {
     isSelect
-      ? dispatch({ type: "DELETE", id })
-      : dispatch({ type: "ADD", element: { id, category } });
+      ? dataHandler.deleteElement(id)
+      : dataHandler.addElement({ id, category });
   };
 
   return (

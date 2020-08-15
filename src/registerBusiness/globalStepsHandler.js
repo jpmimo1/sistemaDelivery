@@ -4,6 +4,7 @@ import useFirstStepData from "./firstStep/firstStepDataHandler";
 import useSecondStepData from "./secondStep/secondStepDataHanldler";
 import useThirdStepData from "./thirdStep/thirdStepDataHandler";
 import useSnackbarHandler from "../snackBarHandler/snackBarHandler";
+import useFourthStepData from "./fouthStep/fourthStepDataHandler";
 
 class GlobalStepsHandler {
   constructor(
@@ -12,6 +13,7 @@ class GlobalStepsHandler {
     firstStepData,
     secondStepData,
     thirdStepData,
+    fourthStepData,
     snackBarHandler
   ) {
     this.stepsNavigator = stepsNavigator;
@@ -19,6 +21,7 @@ class GlobalStepsHandler {
     this.firstStepData = firstStepData;
     this.secondStepData = secondStepData;
     this.thirdStepData = thirdStepData;
+    this.fourthStepData = fourthStepData;
     this.snackBarHandler = snackBarHandler;
   }
 
@@ -26,16 +29,14 @@ class GlobalStepsHandler {
     return this.stepsNavigator;
   };
 
+  //First Step Actions
   tryFirstStepDataNext = () => {
     this.stepsNavigator.next();
   };
 
+  //Second Step Actions
   getSecondStepData = () => {
     return this.secondStepData;
-  };
-
-  getThirdStepData = () => {
-    return this.thirdStepData;
   };
 
   trySecondStepDataNext = async () => {
@@ -50,6 +51,11 @@ class GlobalStepsHandler {
     }
   };
 
+  //Third Step Actions
+  getThirdStepData = () => {
+    return this.thirdStepData;
+  };
+
   tryThirdStepDataNext = async () => {
     const locationData = await this.dataRegisterBusiness.setLocation({
       location: this.thirdStepData.values
@@ -57,6 +63,23 @@ class GlobalStepsHandler {
 
     if (locationData.errors) {
       this.snackBarHandler.sendFromYupErrors(locationData.errors);
+    } else {
+      this.stepsNavigator.next();
+    }
+  };
+
+  //Fourth Step Actions
+  getFourthStepData = () => {
+    return this.fourthStepData;
+  };
+
+  tryFourthStepDataNext = async () => {
+    const categoriesData = await this.dataRegisterBusiness.setCategories({
+      categories: this.fourthStepData.data
+    });
+
+    if (categoriesData.errors) {
+      this.snackBarHandler.sendFromYupErrors(categoriesData.errors);
     } else {
       this.stepsNavigator.next();
     }
@@ -76,6 +99,10 @@ class GlobalStepsHandler {
         await this.tryThirdStepDataNext();
         break;
       }
+      case 3: {
+        await this.tryFourthStepDataNext();
+        break;
+      }
       default:
     }
   };
@@ -87,6 +114,7 @@ const useGlobalStepsHandler = () => {
   const firstStepData = useFirstStepData();
   const secondStepData = useSecondStepData();
   const thirdStepData = useThirdStepData();
+  const fourthStepData = useFourthStepData();
   const snackBarHandler = useSnackbarHandler();
   return new GlobalStepsHandler(
     stepsNavigator,
@@ -94,6 +122,7 @@ const useGlobalStepsHandler = () => {
     firstStepData,
     secondStepData,
     thirdStepData,
+    fourthStepData,
     snackBarHandler
   );
 };

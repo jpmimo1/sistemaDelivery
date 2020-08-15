@@ -8,11 +8,21 @@ import {
   reducer as reducerLocation
 } from "./reducerLocation";
 
-const initialState = { ...initialStateInitialData, ...initialStateLocation };
+import {
+  initialState as initialStateCategories,
+  reducer as reducerCategories
+} from "./reducerCategories";
+
+const initialState = {
+  ...initialStateInitialData,
+  ...initialStateLocation,
+  ...initialStateCategories
+};
 
 const objectReducers = {
   initialData: reducerInitialData,
-  location: reducerLocation
+  location: reducerLocation,
+  categories: reducerCategories
 };
 
 /*Juntamos todos los reducer recorriendo el arreglo y concatenado con las key respectivas */

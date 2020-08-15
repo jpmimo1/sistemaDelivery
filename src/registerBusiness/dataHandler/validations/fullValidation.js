@@ -20,16 +20,16 @@ const fullValidation = async (
       prevObject,
       optionsValidation
     );
-    fullObject = { ...fullObject, ...newObject };
+    fullObject = newObject;
   } catch (errors) {
-    return { data: { ...fullObject }, errors };
+    return { data: fullObject, errors };
   }
   try {
     const newObject = await warningValidationSchema.validate(
       prevObject,
       optionsValidation
     );
-    return { data: { ...fullObject, ...newObject } };
+    return { data: newObject };
   } catch ({ errors }) {
     return { data: fullObject, warnings: errors };
   }

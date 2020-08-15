@@ -10,6 +10,8 @@ class DataRegisterBusiness {
     this.dispatchData = dispatchData;
     this.validators = validators();
   }
+
+  //Initial Data actions
   setInitialData = async (initialData) => {
     const initialDataValidated = await fullValidation(
       this.validators.getInitialDataMain(),
@@ -26,7 +28,7 @@ class DataRegisterBusiness {
   getInitialData = () => {
     return this.data.initialData;
   };
-
+  //Location actions
   setLocation = async (location) => {
     const locationValidated = await fullValidation(
       this.validators.getLocationMain(),
@@ -39,6 +41,24 @@ class DataRegisterBusiness {
   };
   getLocation = () => {
     return this.data.location;
+  };
+
+  //Categories actions
+  setCategories = async (categories) => {
+    const categoriesValidated = await fullValidation(
+      this.validators.getCategoriesMain(),
+      this.validators.getCategoriesWarnings(),
+      categories
+    );
+
+    this.dispatchData({
+      type: "SET-CATEGORIES",
+      categories: categoriesValidated
+    });
+    return categoriesValidated;
+  };
+  getCategories = () => {
+    return this.data.categories;
   };
 }
 

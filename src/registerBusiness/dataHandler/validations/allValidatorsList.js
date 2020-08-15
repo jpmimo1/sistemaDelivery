@@ -35,10 +35,23 @@ const locationValidators = {
   warnings: locationValidationWarnings
 };
 
+/*Categories Validators */
+const categoriesValidationMain = Yup.array()
+  .required("Debe seleccionar al menos un elemento")
+  .label("Categorias");
+
+const categoriesValidationWarnings = Yup.array();
+
+const categoriesValidators = {
+  main: categoriesValidationMain,
+  warnings: categoriesValidationWarnings
+};
+
 /*List all validators*/
 const allValidatorsList = {
   initialDataValidators,
-  locationValidators
+  locationValidators,
+  categoriesValidators
 };
 
 export default allValidatorsList;

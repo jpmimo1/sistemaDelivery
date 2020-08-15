@@ -65,7 +65,6 @@ function ThirdStep({ dataHandler }) {
                   : coordsDataHandler.current
               }
               setCoords={(coords) => {
-                console.log("se ejecutó");
                 dataHandler.setFieldValue("coords", coords);
               }}
             />
