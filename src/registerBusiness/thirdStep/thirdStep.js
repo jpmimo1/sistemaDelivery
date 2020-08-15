@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Typography, TextField, makeStyles, Grid } from "@material-ui/core";
-import { geolocated } from "react-geolocated";
 import SelectsDirection from "./selectsDirection";
 import Map from "./map";
 import useFirstLocationHandler from "./firstLocationHandler";
+import { useRef } from "react";
 
 function ThirdStep({ dataHandler }) {
   const [firstLocation, dispatchFirstLocation] = useFirstLocationHandler();
-  const [coords, setCoords] = useState({ lat: 0, lng: 0 });
+
+  const coordsDataHandler = useRef();
 
   useEffect(() => {
-    console.log(coords);
-  }, [coords]);
+    coordsDataHandler.current = dataHandler.values.coords;
+  }, []);
 
   const classes = useStyles();
 
@@ -19,6 +20,11 @@ function ThirdStep({ dataHandler }) {
     <>
       <Typography variant="h4" color="secondary" paragraph align="center">
         Ubicación
+      </Typography>
+      <Typography color="textSecondary" variant="body2" paragraph>
+        Ingrese la información sobre la ubicación de su negocio, trate de ser lo
+        mas preciso, al seleccionar la ubicación en el mapa, para que sus
+        clientes puedan ubicarlo más rápido.
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
@@ -51,7 +57,18 @@ function ThirdStep({ dataHandler }) {
             <Typography variant="subtitle1" color="textSecondary">
               Localice la ubicación de su negocio
             </Typography>
-            <Map firstLocation={firstLocation.location} setCoords={setCoords} />
+            <Map
+              firstLocation={
+                dataHandler.values.coords.lat === 0 &&
+                dataHandler.values.coords.lng === 0
+                  ? firstLocation.location
+                  : coordsDataHandler.current
+              }
+              setCoords={(coords) => {
+                console.log("se ejecutó");
+                dataHandler.setFieldValue("coords", coords);
+              }}
+            />
           </div>
         </Grid>
       </Grid>
@@ -59,12 +76,7 @@ function ThirdStep({ dataHandler }) {
   );
 }
 
-export default geolocated({
-  positionOptions: {
-    enableHighAccuracy: false
-  },
-  userDecisionTimeout: 5000
-})(ThirdStep);
+export default ThirdStep;
 
 const useStyles = makeStyles((theme) => ({
   rootMap: {

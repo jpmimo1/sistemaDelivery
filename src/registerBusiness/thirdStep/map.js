@@ -30,7 +30,6 @@ function Map({ firstLocation, setCoords }) {
   useEffect(() => {
     if (firstLocation) {
       dispatchDefaultLocation({ type: "SET", location: firstLocation });
-      setCoords(firstLocation);
     }
   }, [firstLocation]);
 

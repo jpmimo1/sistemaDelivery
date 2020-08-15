@@ -40,7 +40,12 @@ function SelectOutlined({
       required={required}
     >
       <InputLabel id={idLabel}>{label}</InputLabel>
-      <Select labelId={idLabel} id={id} label={label} {...props}>
+      <Select
+        labelId={idLabel}
+        id={id}
+        label={label + (required && " *")}
+        {...props}
+      >
         {items}
       </Select>
       {helperText && helperText !== "" && (

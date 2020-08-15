@@ -7,7 +7,7 @@ function FirstStep() {
       <Typography variant="h4" color="secondary" paragraph align="center">
         Registro
       </Typography>
-      <Typography variant="body1">
+      <Typography color="textSecondary" variant="body2" paragraph>
         Bienvenido a delivery.com, esta a punto de registrar su negocio con
         nosotros, para poder continuar haga click en siguiente
       </Typography>

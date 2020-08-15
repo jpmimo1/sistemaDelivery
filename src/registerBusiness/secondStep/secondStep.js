@@ -14,7 +14,7 @@ function SecondStep({ dataHandler }) {
       <Typography variant="h4" color="secondary" paragraph align="center">
         Datos Iniciales
       </Typography>
-      <Typography variant="body1" paragraph>
+      <Typography color="textSecondary" variant="body2" paragraph>
         Ingrese los datos básicos de su negocio, el nombre, una descripción y el
         numero de télefono.
       </Typography>
