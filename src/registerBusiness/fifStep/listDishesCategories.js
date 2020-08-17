@@ -2,25 +2,20 @@ import React, { Fragment } from "react";
 import ListDishes from "./listDishes";
 import ListItemCategory from "./listItemCategory";
 
-function ListDishesCategories({ dishes, categories, dispatchMenu }) {
+function ListDishesCategories({ dataHandler }) {
   return (
     <div>
-      <ListDishes
-        dishes={dishes}
-        dispatchMenu={dispatchMenu}
-        categories={categories}
-      />
+      <ListDishes dataHandler={dataHandler} />
 
-      {categories.map((category) => {
+      {dataHandler.data.categories.map((category) => {
         const { id, dishes } = category;
         return (
           <Fragment key={id}>
-            <ListItemCategory {...category} dispatchMenu={dispatchMenu} />
+            <ListItemCategory {...category} dataHandler={dataHandler} />
             <ListDishes
-              dishes={dishes}
               idCategory={id}
-              dispatchMenu={dispatchMenu}
-              categories={categories}
+              dishes={dishes}
+              dataHandler={dataHandler}
             />
           </Fragment>
         );

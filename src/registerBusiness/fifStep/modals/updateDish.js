@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import DishGeneral from "./dishGeneral";
 import { useFormik } from "formik";
+import schemaDish from "./validatorDish";
 
 function UpdateDish({
   id,
@@ -11,8 +12,7 @@ function UpdateDish({
   photo,
   open,
   dispatchOpen,
-  categories,
-  dispatchMenu
+  dataHandler
 }) {
   const fieldsValues = useFormik({
     initialValues: {
@@ -21,6 +21,20 @@ function UpdateDish({
       category: "",
       price: "0",
       photo: null
+    },
+    validationSchema: schemaDish,
+    onSubmit: (values) => {
+      dataHandler.updateDish(
+        {
+          id,
+          name: values.name,
+          description: values.description,
+          price: values.price,
+          photo: values.photo
+        },
+        values.category
+      );
+      dispatchOpen({ type: "CLOSE" });
     }
   });
 
@@ -33,18 +47,7 @@ function UpdateDish({
   };
 
   const handleOnUpdate = () => {
-    dispatchMenu({
-      type: "UPDATE-DISH",
-      dish: {
-        id,
-        name: fieldsValues.values.name,
-        description: fieldsValues.values.description,
-        price: fieldsValues.values.price,
-        photo: fieldsValues.values.photo
-      },
-      idCategory: fieldsValues.values.category
-    });
-    dispatchOpen({ type: "CLOSE" });
+    fieldsValues.submitForm();
   };
 
   const handleChangePhoto = (imageList) => {
@@ -53,10 +56,12 @@ function UpdateDish({
     else fieldsValues.setFieldValue("photo", null);
   };
 
-  const categoriesRefactor = categories.map(({ id, name }) => ({
-    id,
-    label: name
-  }));
+  const categoriesRefactor = dataHandler.data.categories.map(
+    ({ id, name }) => ({
+      id,
+      label: name
+    })
+  );
 
   return (
     <DishGeneral
@@ -66,8 +71,11 @@ function UpdateDish({
       category={fieldsValues.values.category}
       price={fieldsValues.values.price}
       photo={fieldsValues.values.photo}
+      errors={fieldsValues.errors}
+      touched={fieldsValues.touched}
       handleChange={fieldsValues.handleChange}
       handleChangePhoto={handleChangePhoto}
+      handleBlur={fieldsValues.handleBlur}
       categories={categoriesRefactor}
       open={open}
       successLabel={"Modificar"}

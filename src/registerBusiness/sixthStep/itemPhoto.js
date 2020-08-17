@@ -1,22 +1,30 @@
 import React from "react";
 import { SortableHandle, SortableElement } from "react-sortable-hoc";
-import { IconButton, CardMedia, makeStyles } from "@material-ui/core";
+import {
+  IconButton,
+  CardMedia,
+  makeStyles,
+  CardActionArea
+} from "@material-ui/core";
 import {
   Delete as DeleteIcon,
   Edit as EditIcon,
   DragIndicator as DragIndicatorIcon
 } from "@material-ui/icons";
-import ConfirmGeneral from "../../modals/confirmGeneral";
-import { useOpenDialog } from "../../../hooks";
-import UpdatePhoto from "./updatePhoto";
+import ConfirmGeneral from "../modals/confirmGeneral";
+import { useOpenDialog } from "../../hooks";
+import UpdatePhoto from "./modals/updatePhoto";
 
-const DragHandle = SortableHandle(() => (
-  <IconButton aria-label="sortable-icon-button">
-    <DragIndicatorIcon />
-  </IconButton>
-));
+const DragHandle = SortableHandle(() => {
+  const classes = useStyles();
+  return (
+    <div className={classes.divSortableHandle}>
+      <DragIndicatorIcon color="action" />
+    </div>
+  );
+});
 
-function ItemPhoto({ photoItem, dispatchPhotos }) {
+function ItemPhoto({ photoItem, dataHandler }) {
   const { id, description, photo } = photoItem;
 
   const [openConfirmDelete, dispatchOpenConfirmDelete] = useOpenDialog();
@@ -25,14 +33,16 @@ function ItemPhoto({ photoItem, dispatchPhotos }) {
   const classes = useStyles();
 
   const handleSuccessDelete = () => {
-    dispatchPhotos({ type: "REMOVE", id });
+    dataHandler.remove(id);
     dispatchOpenConfirmDelete({ type: "CLOSE" });
   };
 
   return (
     <>
       <div className={classes.root}>
-        <DragHandle />
+        <CardActionArea className={classes.divSortableHandle}>
+          <DragHandle />
+        </CardActionArea>
         <div>
           {photo && photo !== "" && (
             <CardMedia
@@ -56,7 +66,7 @@ function ItemPhoto({ photoItem, dispatchPhotos }) {
       <UpdatePhoto
         open={openUpdate}
         dispatchOpen={dispatchOpenUpdate}
-        dispatchPhotos={dispatchPhotos}
+        dataHandler={dataHandler}
         photoItem={photoItem}
       />
       <ConfirmGeneral
@@ -102,6 +112,13 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: "100%",
     left: 0
+  },
+  divSortableHandle: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: theme.spacing(6),
+    height: theme.spacing(6)
   }
 }));
 

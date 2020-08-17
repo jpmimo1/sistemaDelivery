@@ -33,8 +33,8 @@ function Steps({ globalStepsHandler }) {
     <SecondStep dataHandler={globalStepsHandler.getSecondStepData()} />,
     <ThirdStep dataHandler={globalStepsHandler.getThirdStepData()} />,
     <FourthStep dataHandler={globalStepsHandler.getFourthStepData()} />,
-    <FifthStep />,
-    <SixthStep />,
+    <FifthStep dataHandler={globalStepsHandler.getFifthStepData()} />,
+    <SixthStep dataHandler={globalStepsHandler.getSixthStepData()} />,
     <SeventhStep />,
     <EighthStep />
   ];

@@ -1,5 +1,11 @@
 import React from "react";
-import { IconButton, Button, makeStyles, Typography } from "@material-ui/core";
+import {
+  IconButton,
+  Button,
+  makeStyles,
+  Typography,
+  CardActionArea
+} from "@material-ui/core";
 import {
   Delete as DeleteIcon,
   Edit as EditIcon,
@@ -33,14 +39,24 @@ const useStyles = makeStyles((theme) => ({
   },
   typographyPrice: {
     padding: theme.spacing(0, 2)
+  },
+  divSortableHandle: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: theme.spacing(6),
+    height: theme.spacing(6)
   }
 }));
 
-const DragHandle = SortableHandle(() => (
-  <IconButton aria-label="sortable-icon-button">
-    <DragIndicatorIcon />
-  </IconButton>
-));
+const DragHandle = SortableHandle(() => {
+  const classes = useStyles();
+  return (
+    <div className={classes.divSortableHandle}>
+      <DragIndicatorIcon color="action" />
+    </div>
+  );
+});
 
 function ListItemDish({
   id,
@@ -50,8 +66,7 @@ function ListItemDish({
   price,
   photo,
   last,
-  dispatchMenu,
-  categories
+  dataHandler
 }) {
   const classes = useStyles();
   const [openDeleteDishDialog, dispatchOpenDeleteDishDialog] = useOpenDialog();
@@ -63,7 +78,7 @@ function ListItemDish({
   };
   const handleSuccessDelete = () => {
     dispatchOpenDeleteDishDialog({ type: "CLOSE" });
-    dispatchMenu({ type: "DELETE-DISH", id: id });
+    dataHandler.deleteDish(id);
   };
   const handleCancelDelete = () => {
     dispatchOpenDeleteDishDialog({ type: "CLOSE" });
@@ -75,7 +90,9 @@ function ListItemDish({
   return (
     <>
       <div className={classes.root}>
-        <DragHandle />
+        <CardActionArea className={classes.divSortableHandle}>
+          <DragHandle />
+        </CardActionArea>
         <div className={classes.divButton}>
           <Button
             classes={{ root: classes.rootButton }}
@@ -114,8 +131,7 @@ function ListItemDish({
         photo={photo}
         open={openUpdateDialog}
         dispatchOpen={dispatchOpenUpdateDialog}
-        categories={categories}
-        dispatchMenu={dispatchMenu}
+        dataHandler={dataHandler}
       />
       <SeeDish
         open={openSeeDish}

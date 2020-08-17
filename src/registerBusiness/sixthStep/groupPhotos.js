@@ -1,5 +1,5 @@
 import React from "react";
-import ItemPhoto from "./modals/itemPhoto";
+import ItemPhoto from "./itemPhoto";
 import { Paper, makeStyles } from "@material-ui/core";
 import { SortableContainer } from "react-sortable-hoc";
 
@@ -11,16 +11,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function GroupPhotos({ photos, dispatchPhotos }) {
+function GroupPhotos({ dataHandler }) {
   const classes = useStyles();
   return (
     <Paper className={classes.paper}>
-      {photos.map((photo, i) => (
+      {dataHandler.data.map((photo, i) => (
         <ItemPhoto
           key={photo.id}
           photoItem={photo}
           index={i}
-          dispatchPhotos={dispatchPhotos}
+          dataHandler={dataHandler}
         />
       ))}
     </Paper>
@@ -29,14 +29,10 @@ function GroupPhotos({ photos, dispatchPhotos }) {
 
 const SortableList = SortableContainer(GroupPhotos);
 
-const ElementToRender = ({ photos, dispatchPhotos }) => {
+const ElementToRender = ({ dataHandler }) => {
   const classes = useStyles();
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    dispatchPhotos({
-      type: "REORDER",
-      from: oldIndex,
-      to: newIndex
-    });
+    dataHandler.reorder(oldIndex, newIndex);
   };
 
   return (
@@ -44,8 +40,7 @@ const ElementToRender = ({ photos, dispatchPhotos }) => {
       useDragHandle
       pressDelay={100}
       onSortEnd={onSortEnd}
-      photos={photos}
-      dispatchPhotos={dispatchPhotos}
+      dataHandler={dataHandler}
       helperClass={classes.listItemSortable}
     />
   );

@@ -11,19 +11,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function ListDishes({ dishes, dispatchMenu, idCategory, categories }) {
+function ListDishes({ dataHandler, idCategory, dishes }) {
   const classes = useStyles();
-  const dishesComponents = dishes.map((dish, i) => {
+  const dishesActual = dishes ? dishes : dataHandler.data.dishes;
+  const dishesComponents = dishesActual.map((dish, i) => {
     const { id } = dish;
     return (
       <ListItemDish
         key={id}
         {...dish}
-        last={i >= dishes.length - 1}
+        last={i >= dishesActual.length - 1}
         index={i}
-        dispatchMenu={dispatchMenu}
         idCategory={idCategory}
-        categories={categories}
+        dataHandler={dataHandler}
       />
     );
   });
@@ -36,28 +36,22 @@ function ListDishes({ dishes, dispatchMenu, idCategory, categories }) {
 
 const SortableList = SortableContainer(ListDishes);
 
-const ElementToRender = ({ dishes, idCategory, dispatchMenu, categories }) => {
+const ElementToRender = ({ idCategory, dishes, dataHandler }) => {
   const classes = useStyles();
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    dispatchMenu({
-      type: "REORDER-DISH",
-      idCategory,
-      from: oldIndex,
-      to: newIndex
-    });
+    dataHandler.reorderDish(oldIndex, newIndex, idCategory);
   };
 
   return (
     <SortableList
       useDragHandle
-      dishes={dishes}
       idCategory={idCategory}
-      categories={categories}
       pressDelay={100}
       helperClass={classes.listItemSortable}
       onSortEnd={onSortEnd}
-      dispatchMenu={dispatchMenu}
+      dishes={dishes}
+      dataHandler={dataHandler}
     />
   );
 };

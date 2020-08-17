@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import ModalGeneralStyle from "../../../globals/modalGeneralStyle";
 
-
 function CategoryGeneral({
   title,
   handleChange,
@@ -19,7 +18,10 @@ function CategoryGeneral({
   onSuccess,
   open,
   onClose,
-  successLabel
+  successLabel,
+  handleBlur,
+  errors,
+  touched
 }) {
   const classes = useStyles();
   return (
@@ -42,6 +44,9 @@ function CategoryGeneral({
               variant="outlined"
               onChange={handleChange}
               value={name}
+              onBlur={handleBlur}
+              error={touched.name && !!errors.name}
+              helperText={touched.name && errors.name ? errors.name : ""}
             />
           </Grid>
           <Grid item xs={12}>
@@ -54,6 +59,13 @@ function CategoryGeneral({
               variant="outlined"
               onChange={handleChange}
               value={description}
+              onBlur={handleBlur}
+              error={touched.description && !!errors.description}
+              helperText={
+                touched.description && errors.description
+                  ? errors.description
+                  : ""
+              }
             />
           </Grid>
 

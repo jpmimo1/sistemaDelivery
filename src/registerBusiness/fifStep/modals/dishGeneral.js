@@ -10,7 +10,8 @@ import {
   InputLabel,
   OutlinedInput,
   InputAdornment,
-  IconButton
+  IconButton,
+  FormHelperText
 } from "@material-ui/core";
 import {
   PhotoCamera as PhotoCameraIcon,
@@ -24,10 +25,13 @@ function DishGeneral({
   title,
   handleChange,
   handleChangePhoto,
+  handleBlur,
   name,
   description,
   category,
   photo,
+  errors,
+  touched,
   categories,
   onCancel,
   onSuccess,
@@ -57,10 +61,18 @@ function DishGeneral({
               variant="outlined"
               onChange={handleChange}
               value={name}
+              onBlur={handleBlur}
+              error={touched.name && !!errors.name}
+              helperText={touched.name && errors.name ? errors.name : ""}
             />
           </Grid>
           <Grid item xs={12}>
-            <FormControl fullWidth variant="outlined">
+            <FormControl
+              fullWidth
+              variant="outlined"
+              required
+              error={touched.price && !!errors.price}
+            >
               <InputLabel htmlFor="price-dish">Precio</InputLabel>
               <OutlinedInput
                 name="price"
@@ -70,8 +82,14 @@ function DishGeneral({
                 startAdornment={
                   <InputAdornment position="start">S/.</InputAdornment>
                 }
-                labelWidth={50}
+                labelWidth={60}
+                onBlur={handleBlur}
               />
+              {touched.price && errors.price && (
+                <FormHelperText>
+                  {touched.price && errors.price ? errors.price : ""}
+                </FormHelperText>
+              )}
             </FormControl>
           </Grid>
           <Grid item xs={12}>
@@ -84,6 +102,13 @@ function DishGeneral({
               variant="outlined"
               onChange={handleChange}
               value={description}
+              onBlur={handleBlur}
+              error={touched.description && !!errors.description}
+              helperText={
+                touched.description && errors.description
+                  ? errors.description
+                  : ""
+              }
             />
           </Grid>
           {categories && categories.length > 0 ? (

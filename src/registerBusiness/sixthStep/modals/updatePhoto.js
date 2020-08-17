@@ -1,12 +1,22 @@
 import React, { useEffect } from "react";
 import PhotoGeneral from "./photoGeneral";
 import { useFormik } from "formik";
+import schemaPhoto from "./validatorPhoto";
 
-function UpdatePhoto({ open, dispatchOpen, dispatchPhotos, photoItem }) {
+function UpdatePhoto({ open, dispatchOpen, dataHandler, photoItem }) {
   const fieldsValues = useFormik({
     initialValues: {
       description: "",
       photo: null
+    },
+    validationSchema: schemaPhoto,
+    onSubmit: (values) => {
+      dataHandler.update({
+        ...photoItem,
+        description: values.description,
+        photo: values.photo
+      });
+      dispatchOpen({ type: "CLOSE" });
     }
   });
 
@@ -16,15 +26,7 @@ function UpdatePhoto({ open, dispatchOpen, dispatchPhotos, photoItem }) {
   }, []);
 
   const handleOnUpdate = () => {
-    dispatchPhotos({
-      type: "UPDATE",
-      photo: {
-        ...photoItem,
-        description: fieldsValues.values.description,
-        photo: fieldsValues.values.photo
-      }
-    });
-    dispatchOpen({ type: "CLOSE" });
+    fieldsValues.submitForm();
   };
 
   const handleOnClose = () => {
@@ -49,6 +51,9 @@ function UpdatePhoto({ open, dispatchOpen, dispatchPhotos, photoItem }) {
       handleChangePhoto={handleChangePhoto}
       successLabel="Modificar"
       onSuccess={handleOnUpdate}
+      handleBlur={fieldsValues.handleBlur}
+      errors={fieldsValues.errors}
+      touched={fieldsValues.touched}
     />
   );
 }

@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function ListItemCategory({ name, id, description, dispatchMenu }) {
+function ListItemCategory({ name, id, description, dataHandler }) {
   const classes = useStyles();
   const [openDialogDelete, dispatchDialogDelete] = useOpenDialog();
   const [openDialogUpdate, dispatchDialogUpdate] = useOpenDialog();
@@ -26,7 +26,7 @@ function ListItemCategory({ name, id, description, dispatchMenu }) {
 
   const handleSuccessDelete = () => {
     dispatchDialogDelete({ type: "CLOSE" });
-    dispatchMenu({ type: "DELETE-CATEGORY", idCategory: id });
+    dataHandler.deleteCategory(id);
   };
 
   const handleCancelDelete = () => {
@@ -68,7 +68,7 @@ function ListItemCategory({ name, id, description, dispatchMenu }) {
         description={description}
         open={openDialogUpdate}
         dispatchOpen={dispatchDialogUpdate}
-        dispatchMenu={dispatchMenu}
+        dataHandler={dataHandler}
       />
     </>
   );

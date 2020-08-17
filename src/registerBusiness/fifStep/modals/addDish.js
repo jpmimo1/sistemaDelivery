@@ -1,8 +1,9 @@
 import React from "react";
 import DishGeneral from "./dishGeneral";
 import { useFormik } from "formik";
+import schemaDish from "./validatorDish";
 
-function AddDish({ open, dispatchOpen, categories, dispatchMenu }) {
+function AddDish({ open, dispatchOpen, dataHandler }) {
   const fieldsValues = useFormik({
     initialValues: {
       name: "",
@@ -10,35 +11,27 @@ function AddDish({ open, dispatchOpen, categories, dispatchMenu }) {
       category: "",
       price: "0",
       photo: null
+    },
+    validationSchema: schemaDish,
+    onSubmit: (values, formikBag) => {
+      let idCategory = values.category;
+      dataHandler.addDish(
+        {
+          id: Date.now(),
+          name: values.name,
+          description: values.description,
+          price: values.price,
+          photo: values.photo
+        },
+        idCategory
+      );
+      formikBag.resetForm();
+      dispatchOpen({ type: "CLOSE" });
     }
   });
 
   const handleOnAdd = () => {
-    let idCategory = fieldsValues.values.category;
-    idCategory === ""
-      ? dispatchMenu({
-          type: "ADD-DISH",
-          dish: {
-            id: Date.now(),
-            name: fieldsValues.values.name,
-            description: fieldsValues.values.description,
-            price: fieldsValues.values.price,
-            photo: fieldsValues.values.photo
-          }
-        })
-      : dispatchMenu({
-          type: "ADD-DISH-CATEGORY",
-          dish: {
-            id: Date.now(),
-            name: fieldsValues.values.name,
-            description: fieldsValues.values.description,
-            price: fieldsValues.values.price,
-            photo: fieldsValues.values.photo
-          },
-          idCategory
-        });
-    fieldsValues.resetForm();
-    dispatchOpen({ type: "CLOSE" });
+    fieldsValues.submitForm();
   };
 
   const handleOnClose = () => {
@@ -51,7 +44,7 @@ function AddDish({ open, dispatchOpen, categories, dispatchMenu }) {
     else fieldsValues.setFieldValue("photo", null);
   };
 
-  const categoriesRebuild = categories.map(({ id, name }) => ({
+  const categoriesRebuild = dataHandler.data.categories.map(({ id, name }) => ({
     id,
     label: name
   }));
@@ -64,7 +57,10 @@ function AddDish({ open, dispatchOpen, categories, dispatchMenu }) {
       category={fieldsValues.values.category}
       price={fieldsValues.values.price}
       photo={fieldsValues.values.photo}
+      errors={fieldsValues.errors}
+      touched={fieldsValues.touched}
       handleChange={fieldsValues.handleChange}
+      handleBlur={fieldsValues.handleBlur}
       onClose={handleOnClose}
       onCancel={handleOnClose}
       onSuccess={handleOnAdd}

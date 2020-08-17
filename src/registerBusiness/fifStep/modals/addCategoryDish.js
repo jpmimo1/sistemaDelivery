@@ -1,27 +1,29 @@
 import React from "react";
 import { useFormik } from "formik";
 import CategoryGeneral from "./categoryGeneral";
+import schemaCategory from "./validatorCategory";
 
-function AddCategoryDish({ open, dispatchOpen, dispatchMenu }) {
+function AddCategoryDish({ open, dispatchOpen, dataHandler }) {
   const fieldsValues = useFormik({
     initialValues: {
       name: "",
       description: ""
+    },
+    validationSchema: schemaCategory,
+    onSubmit: (values, formikBag) => {
+      dataHandler.addCategory({
+        id: Date.now(),
+        name: values.name,
+        description: values.description,
+        dishes: []
+      });
+      formikBag.resetForm();
+      dispatchOpen({ type: "CLOSE" });
     }
   });
 
   const handleOnAdd = () => {
-    dispatchMenu({
-      type: "ADD-CATEGORY",
-      category: {
-        id: Date.now(),
-        name: fieldsValues.values.name,
-        description: fieldsValues.values.description,
-        dishes: []
-      }
-    });
-    fieldsValues.resetForm();
-    dispatchOpen({ type: "CLOSE" });
+    fieldsValues.submitForm();
   };
 
   const handleOnClose = () => {
@@ -40,6 +42,9 @@ function AddCategoryDish({ open, dispatchOpen, dispatchMenu }) {
       open={open}
       onClose={handleOnClose}
       successLabel={"Agregar"}
+      handleBlur={fieldsValues.handleBlur}
+      errors={fieldsValues.errors}
+      touched={fieldsValues.touched}
     />
   );
 }

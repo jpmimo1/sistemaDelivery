@@ -60,6 +60,41 @@ class DataRegisterBusiness {
   getCategories = () => {
     return this.data.categories;
   };
+
+  //Menu actions
+  setMenu = async (menu) => {
+    const menuValidated = await fullValidation(
+      this.validators.getMenuMain(),
+      this.validators.getMenuWarnings(),
+      menu
+    );
+
+    this.dispatchData({
+      type: "SET-MENU",
+      menu: menuValidated
+    });
+    return menuValidated;
+  };
+  getMenu = () => {
+    return this.data.menu;
+  };
+
+  //Photos actions
+  setPhotos = async (photos) => {
+    const photosValidated = await fullValidation(
+      this.validators.getPhotosMain(),
+      this.validators.getPhotosWarnings(),
+      photos
+    );
+    this.dispatchData({
+      type: "SET-PHOTOS",
+      photos: photosValidated
+    });
+    return photosValidated;
+  };
+  getPhotos = () => {
+    return this.data.photos;
+  };
 }
 
 const useDataRegisterBusiness = () => {

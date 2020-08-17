@@ -1,26 +1,28 @@
 import React from "react";
 import PhotoGeneral from "./photoGeneral";
 import { useFormik } from "formik";
+import schemaPhoto from "./validatorPhoto";
 
-function AddPhoto({ open, dispatchOpen, dispatchPhotos }) {
+function AddPhoto({ open, dispatchOpen, dataHandler }) {
   const fieldsValues = useFormik({
     initialValues: {
       description: "",
       photo: null
+    },
+    validationSchema: schemaPhoto,
+    onSubmit: (values, formikBag) => {
+      dataHandler.add({
+        description: values.description,
+        photo: values.photo
+      });
+
+      formikBag.resetForm();
+      dispatchOpen({ type: "CLOSE" });
     }
   });
 
   const handleOnAdd = () => {
-    dispatchPhotos({
-      type: "ADD",
-      photo: {
-        description: fieldsValues.values.description,
-        photo: fieldsValues.values.photo
-      }
-    });
-
-    fieldsValues.resetForm();
-    dispatchOpen({ type: "CLOSE" });
+    fieldsValues.submitForm();
   };
 
   const handleOnClose = () => {
@@ -44,6 +46,9 @@ function AddPhoto({ open, dispatchOpen, dispatchPhotos }) {
       handleChangePhoto={handleChangePhoto}
       successLabel="Agregar"
       onSuccess={handleOnAdd}
+      handleBlur={fieldsValues.handleBlur}
+      errors={fieldsValues.errors}
+      touched={fieldsValues.touched}
     />
   );
 }

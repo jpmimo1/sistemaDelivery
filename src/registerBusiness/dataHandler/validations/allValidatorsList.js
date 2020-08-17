@@ -47,11 +47,31 @@ const categoriesValidators = {
   warnings: categoriesValidationWarnings
 };
 
+/*Menu Validators */
+const menuValidationMain = Yup.object();
+const menuValidationWarnings = Yup.object().menuEmpty().menuCategoriesEmpty();
+const menuValidators = {
+  main: menuValidationMain,
+  warnings: menuValidationWarnings
+};
+
+/*Photos Validators */
+const photosValidationMain = Yup.array();
+const photosValidationWarnings = Yup.array()
+  .required("No se agregaron fotos")
+  .label("Fotos");
+const photosValidators = {
+  main: photosValidationMain,
+  warnings: photosValidationWarnings
+};
+
 /*List all validators*/
 const allValidatorsList = {
   initialDataValidators,
   locationValidators,
-  categoriesValidators
+  categoriesValidators,
+  menuValidators,
+  photosValidators
 };
 
 export default allValidatorsList;

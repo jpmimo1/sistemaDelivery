@@ -6,7 +6,8 @@ import {
   TextField,
   makeStyles,
   Button,
-  IconButton
+  IconButton,
+  FormHelperText
 } from "@material-ui/core";
 import ModalGeneralStyle from "../../../globals/modalGeneralStyle";
 import ImageUploading from "react-images-uploading";
@@ -24,7 +25,10 @@ function PhotoGeneral({
   handleChange,
   handleChangePhoto,
   successLabel,
-  onSuccess
+  onSuccess,
+  handleBlur,
+  errors,
+  touched
 }) {
   const classes = useStyles();
   return (
@@ -39,7 +43,7 @@ function PhotoGeneral({
             maxFileSize={1024 * 1024 * 5}
             onChange={handleChangePhoto}
           >
-            {({ imageList, onImageUpload, onImageRemoveAll, errors }) => {
+            {({ imageList, onImageUpload }) => {
               //Revisa que photo exita y que no sea una cadena vacia para obtener el valor de estilo con backgrounImage
               const styleImage = photo &&
                 photo !== "" && {
@@ -47,7 +51,7 @@ function PhotoGeneral({
                 };
               return (
                 <>
-                  <Grid item xs={4}>
+                  <Grid item xs={photo && photo !== "" ? 4 : 12}>
                     <Button
                       variant="contained"
                       color="secondary"
@@ -57,9 +61,14 @@ function PhotoGeneral({
                     >
                       Foto
                     </Button>
+                    {touched.photo && errors.photo && (
+                      <FormHelperText error>
+                        {touched.photo && errors.photo ? errors.photo : ""}
+                      </FormHelperText>
+                    )}
                   </Grid>
-                  <Grid item xs={8}>
-                    {photo && photo !== "" ? (
+                  {photo && photo !== "" ? (
+                    <Grid item xs={8}>
                       <div className={classes.imageContainer}>
                         <div
                           className={classes.divImage}
@@ -77,8 +86,8 @@ function PhotoGeneral({
                           <CloseIcon />
                         </IconButton>
                       </div>
-                    ) : null}
-                  </Grid>
+                    </Grid>
+                  ) : null}
                 </>
               );
             }}
@@ -93,6 +102,13 @@ function PhotoGeneral({
               variant="outlined"
               onChange={handleChange}
               value={description}
+              onBlur={handleBlur}
+              error={touched.description && !!errors.description}
+              helperText={
+                touched.description && errors.description
+                  ? errors.description
+                  : ""
+              }
             />
           </Grid>
           <Grid item xs={12}>

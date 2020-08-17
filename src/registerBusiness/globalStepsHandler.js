@@ -3,8 +3,10 @@ import useDataRegisterBusiness from "./dataHandler/actions";
 import useFirstStepData from "./firstStep/firstStepDataHandler";
 import useSecondStepData from "./secondStep/secondStepDataHanldler";
 import useThirdStepData from "./thirdStep/thirdStepDataHandler";
-import useSnackbarHandler from "../snackBarHandler/snackBarHandler";
 import useFourthStepData from "./fouthStep/fourthStepDataHandler";
+import useFifthStepData from "./fifStep/fifthStepDataHandler";
+import useSixthStepData from "./sixthStep/sixthStepDataHandler";
+import useSnackbarHandler from "../snackBarHandler/snackBarHandler";
 
 class GlobalStepsHandler {
   constructor(
@@ -14,6 +16,8 @@ class GlobalStepsHandler {
     secondStepData,
     thirdStepData,
     fourthStepData,
+    fifthStepData,
+    sixthStepData,
     snackBarHandler
   ) {
     this.stepsNavigator = stepsNavigator;
@@ -22,6 +26,8 @@ class GlobalStepsHandler {
     this.secondStepData = secondStepData;
     this.thirdStepData = thirdStepData;
     this.fourthStepData = fourthStepData;
+    this.fifthStepData = fifthStepData;
+    this.sixthStepData = sixthStepData;
     this.snackBarHandler = snackBarHandler;
   }
 
@@ -85,6 +91,38 @@ class GlobalStepsHandler {
     }
   };
 
+  //Fifth Step Actions
+  getFifthStepData = () => {
+    return this.fifthStepData;
+  };
+  tryFifthStepDataNext = async () => {
+    const menuData = await this.dataRegisterBusiness.setMenu({
+      menu: this.fifthStepData.data
+    });
+
+    if (menuData.errors) {
+      this.snackBarHandler.sendFromYupErrors(menuData.errors);
+    } else {
+      this.stepsNavigator.next();
+    }
+  };
+
+  //Sixth Step Actions
+  getSixthStepData = () => {
+    return this.sixthStepData;
+  };
+  trySixthStepDataNext = async () => {
+    const photosData = await this.dataRegisterBusiness.setPhotos({
+      photos: this.sixthStepData.data
+    });
+
+    if (photosData.errors) {
+      this.snackBarHandler.sendFromYupErrors(photosData.errors);
+    } else {
+      this.stepsNavigator.next();
+    }
+  };
+
   nextStep = async () => {
     switch (this.stepsNavigator.getIndex()) {
       case 0: {
@@ -103,6 +141,14 @@ class GlobalStepsHandler {
         await this.tryFourthStepDataNext();
         break;
       }
+      case 4: {
+        await this.tryFifthStepDataNext();
+        break;
+      }
+      case 5: {
+        await this.trySixthStepDataNext();
+        break;
+      }
       default:
     }
   };
@@ -115,6 +161,8 @@ const useGlobalStepsHandler = () => {
   const secondStepData = useSecondStepData();
   const thirdStepData = useThirdStepData();
   const fourthStepData = useFourthStepData();
+  const fifthStepData = useFifthStepData();
+  const sixthStepData = useSixthStepData();
   const snackBarHandler = useSnackbarHandler();
   return new GlobalStepsHandler(
     stepsNavigator,
@@ -123,6 +171,8 @@ const useGlobalStepsHandler = () => {
     secondStepData,
     thirdStepData,
     fourthStepData,
+    fifthStepData,
+    sixthStepData,
     snackBarHandler
   );
 };

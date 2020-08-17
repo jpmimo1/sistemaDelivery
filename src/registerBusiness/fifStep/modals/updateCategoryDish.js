@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import CategoryGeneral from "./categoryGeneral";
 import { useFormik } from "formik";
+import schemaCategory from "./validatorCategory";
 
 function UpdateCategoryDish({
   id,
@@ -8,12 +9,21 @@ function UpdateCategoryDish({
   description,
   open,
   dispatchOpen,
-  dispatchMenu
+  dataHandler
 }) {
   const fieldsValues = useFormik({
     initialValues: {
       name: "",
       description: ""
+    },
+    validationSchema: schemaCategory,
+    onSubmit: (values) => {
+      dataHandler.updateCategory({
+        id,
+        name: values.name,
+        description: values.description
+      });
+      dispatchOpen({ type: "CLOSE" });
     }
   });
 
@@ -26,15 +36,7 @@ function UpdateCategoryDish({
   };
 
   const handleOnUpdate = () => {
-    dispatchMenu({
-      type: "UPDATE-CATEGORY",
-      category: {
-        id,
-        name: fieldsValues.values.name,
-        description: fieldsValues.values.description
-      }
-    });
-    dispatchOpen({ type: "CLOSE" });
+    fieldsValues.submitForm();
   };
 
   return (
@@ -48,6 +50,9 @@ function UpdateCategoryDish({
       open={open}
       onClose={handleOnClose}
       successLabel={"Modificar"}
+      handleBlur={fieldsValues.handleBlur}
+      errors={fieldsValues.errors}
+      touched={fieldsValues.touched}
     />
   );
 }
